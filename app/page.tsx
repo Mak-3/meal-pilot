@@ -37,7 +37,7 @@ export default function Home() {
             href="#calendar"
             className="rounded-full bg-[var(--mp-ink)] px-4 py-2 text-sm font-medium text-[var(--background)] transition hover:opacity-90"
           >
-            View prototype
+            How it works
           </a>
         </div>
       </header>
@@ -49,7 +49,7 @@ export default function Home() {
         />
         <div className="relative mx-auto max-w-6xl px-4 pb-24 pt-16 sm:px-6 sm:pb-32 sm:pt-24">
           <p className="inline-flex items-center gap-2 rounded-full border border-[var(--mp-border)] bg-[var(--mp-surface)]/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--mp-muted)] shadow-sm backdrop-blur">
-            Prototype · Automation agent for food
+            Concept · Automation for meals & groceries
           </p>
           <h1 className="font-display mt-8 max-w-3xl text-4xl leading-[1.08] tracking-tight text-[var(--mp-ink)] sm:text-5xl lg:text-6xl">
             Food and groceries on autopilot—timed to your{" "}
@@ -173,9 +173,8 @@ export default function Home() {
               Calendar-aware ordering
             </h2>
             <p className="mt-4 text-[var(--mp-muted)]">
-              Meetings sync through Firebase (Firestore as your calendar
-              source). When items move, suggested order times update—before you
-              tap checkout.
+              Your meetings stay in view so suggested order times move when the
+              day does—before you ever tap checkout.
             </p>
           </div>
           <div className="mt-10">
@@ -225,7 +224,7 @@ export default function Home() {
                 OK—or auto-applies if you trust the profile.
               </p>
               <div className="mt-6 rounded-2xl bg-amber-500/10 px-4 py-3 text-sm text-amber-950 ring-1 ring-amber-500/25 dark:text-amber-50">
-                <strong className="font-semibold">Demo:</strong> Brown eggs
+                <strong className="font-semibold">Example:</strong> Brown eggs
                 unavailable → suggested white eggs (6 pack) · saved ₹12 vs
                 last order.
               </div>
@@ -241,8 +240,8 @@ export default function Home() {
           </h2>
           <p className="mt-4 max-w-2xl text-[var(--mp-muted)]">
             One household, several routines. Toggle automations per profile—home,
-            partner, or a whole team pod—with separate payment methods when you
-            wire production.
+            partner, or a whole team pod—with separate cards when you&apos;re
+            ready to go live.
           </p>
           <div className="mt-10 grid gap-6 sm:grid-cols-3">
             {profiles.map((p) => (
@@ -335,7 +334,7 @@ export default function Home() {
       <footer className="border-t border-[var(--mp-border)] py-12 text-center">
         <p className="font-display text-lg text-[var(--mp-ink)]">Meal Pilot</p>
         <p className="mt-2 text-sm text-[var(--mp-muted)]">
-          Prototype UI · Firebase meetings · dummy commerce data
+          Concept & interface preview · sample commerce data
         </p>
       </footer>
     </div>

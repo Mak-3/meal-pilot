@@ -38,7 +38,6 @@ export function LiveMeetings() {
   );
   const [source, setSource] = useState<"firestore" | "demo">("demo");
   const [status, setStatus] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
 
   const configured = useMemo(() => isFirebaseConfigured(), []);
 
@@ -46,9 +45,7 @@ export function LiveMeetings() {
     if (!configured) {
       setMeetings(getDemoMeetingsForToday());
       setSource("demo");
-      setStatus(
-        "Demo data · add Firebase env vars to load real meetings from Firestore."
-      );
+      setStatus("Example schedule for today.");
       return;
     }
 
@@ -72,23 +69,22 @@ export function LiveMeetings() {
           setSource(next.length ? "firestore" : "demo");
           setStatus(
             next.length
-              ? "Live from Firestore · collection `meetings`"
-              : "No documents in `meetings` · showing demo times for today."
+              ? "Updates when your calendar changes."
+              : "Nothing on the calendar yet—here’s a sample day."
           );
-          setError(null);
         },
-        (err) => {
-          setError(err.message);
+        () => {
           setMeetings(getDemoMeetingsForToday());
           setSource("demo");
-          setStatus("Could not read Firestore · showing demo data.");
+          setStatus(
+            "Couldn’t refresh right now. Showing an example schedule."
+          );
         }
       );
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Firebase init failed");
+    } catch {
       setMeetings(getDemoMeetingsForToday());
       setSource("demo");
-      setStatus("Firebase unavailable · demo data.");
+      setStatus("Couldn’t refresh right now. Showing an example schedule.");
     }
     return () => unsub?.();
   }, [configured]);
@@ -111,7 +107,7 @@ export function LiveMeetings() {
               : "rounded-full bg-amber-500/15 px-3 py-1 text-xs font-medium text-amber-900 ring-1 ring-amber-500/30 dark:text-amber-100"
           }
         >
-          {source === "firestore" ? "Live" : "Prototype"}
+          {source === "firestore" ? "Synced" : "Example"}
         </span>
       </div>
 
@@ -129,19 +125,11 @@ export function LiveMeetings() {
         ))}
       </ul>
 
-      <div className="mt-5 space-y-2 border-t border-[var(--mp-border)] pt-4 text-sm text-[var(--mp-muted)]">
-        {status && <p>{status}</p>}
-        {error && (
-          <p className="text-red-600 dark:text-red-400" role="status">
-            {error}
-          </p>
-        )}
-        <p className="text-xs leading-relaxed opacity-90">
-          Firestore docs: <code className="rounded bg-black/[0.04] px-1 py-0.5 dark:bg-white/[0.08]">title</code>,{" "}
-          <code className="rounded bg-black/[0.04] px-1 py-0.5 dark:bg-white/[0.08]">start</code>,{" "}
-          <code className="rounded bg-black/[0.04] px-1 py-0.5 dark:bg-white/[0.08]">end</code> (timestamps).
-        </p>
-      </div>
+      {status && (
+        <div className="mt-5 border-t border-[var(--mp-border)] pt-4 text-sm text-[var(--mp-muted)]">
+          <p>{status}</p>
+        </div>
+      )}
     </div>
   );
 }
